@@ -1,28 +1,48 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Explore() {
   const [users, setUsers] = useState([])
   const [goal, setGoal] = useState('')
   const [gender, setGender] = useState('')
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const navigate = useNavigate()
 
   const handleSearch = async () => {
-    const res = await fetch('https://lzznm.app.n8n.cloud/webhook-test/60051b67-108a-4d15-8623-8c0ffa9571ce', {
+    const res = await fetch('https://lzznm.app.n8n.cloud/webhook/60051b67-108a-4d15-8623-8c0ffa9571ce', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ goal, gender })
     })
-  
+
     const data = await res.json()
-  
+
     if (Array.isArray(data)) {
       setUsers(data)
+      setCurrentIndex(0)
     } else {
       setUsers([])
     }
   }
-  
+
+  const handleLike = async (liked) => {
+    const fromUser = localStorage.getItem('user_id') 
+    const toUser = users[currentIndex].user_id
+
+    await fetch('https://lzznm.app.n8n.cloud/webhook/b985dc6f-d0ff-4418-806e-325665291f07', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from_user_id: fromUser,
+        to_user_id: toUser,
+        liked
+      })
+    })
+
+    setCurrentIndex(prev => prev + 1)
+  }
+
+  const currentUser = users[currentIndex]
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -45,34 +65,38 @@ function Explore() {
         <button onClick={handleSearch}>Поиск</button>
       </div>
 
-      <div style={{ display: 'grid', gap: '1rem' }}>
-        {users.length > 0 ? (
-          users.map((u) => (
-            <div
-              key={u.user_id}
-              style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}
-            >
-              <h3>{u.name}</h3>
-              <p><strong>Группа:</strong> {u.group_name}</p>
-              <p><strong>Возраст:</strong> {u.age}</p>
-              <p><strong>Описание:</strong> {u.description}</p>
-              <p><strong>Цель:</strong> {u.goal}</p>
-              <p><strong>Пол:</strong> {u.gender === 'M' ? 'Мужской' : 'Женский'}</p>
-              <p><strong>Специальность:</strong> {u.specialty}</p>
-              {u.photo && typeof u.photo === 'string' && (
-                <img
-                  src={`https://твоя_ссылка_к_фото/${u.photo}`}
-                  alt="Фото"
-                  style={{ maxWidth: '200px', marginTop: '1rem' }}
-                />
-              )}
-            </div>
-          ))
-        ) : (
-          <p>Нет подходящих анкет</p>
-        )}
-      </div>
+      {users.length > 0 && currentIndex < users.length ? (
+        <div style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
+          <h3>{currentUser.name}</h3>
+          <p><strong>Группа:</strong> {currentUser.group_name}</p>
+          <p><strong>Возраст:</strong> {currentUser.age}</p>
+          <p><strong>Описание:</strong> {currentUser.description}</p>
+          <p><strong>Цель:</strong> {currentUser.goal}</p>
+          <p><strong>Пол:</strong> {currentUser.gender === 'M' ? 'Мужской' : 'Женский'}</p>
+          <p><strong>Специальность:</strong> {currentUser.specialty}</p>
+          {currentUser.photo && typeof currentUser.photo === 'string' && (
+            <img
+              src={`https://твоя_ссылка_к_фото/${currentUser.photo}`}
+              alt="Фото"
+              style={{ maxWidth: '200px', marginTop: '1rem' }}
+            />
+          )}
+
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+            <button onClick={() => handleLike(true)}>👍 Лайк</button>
+            <button onClick={() => alert('Функция сообщений в разработке')}>💬 Сообщение</button>
+            <button onClick={() => handleLike(false)}>👎 Дизлайк</button>
+          </div>
+        </div>
+      ) : (
+        <p>Нет подходящих анкет</p>
+      )}
+
+      <button onClick={() => navigate('/')} style={{ marginTop: '2rem' }}>
+        ← Назад
+      </button>
     </div>
+    
   )
 }
 

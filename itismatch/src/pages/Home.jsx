@@ -23,6 +23,10 @@ function Home() {
             <Link to="/profile">
               <button style={{ marginLeft: '1rem' }}>Личный кабинет</button>
             </Link>
+            <Link to="/matches">
+              <button>❤️ Мои мэтчи</button>
+            </Link>
+
             <button style={{ marginLeft: '1rem' }} onClick={() => {
               localStorage.removeItem('username')
               setUsername(null)
@@ -45,10 +49,17 @@ function Home() {
         </div>
       </header>
 
-      <main style={{ padding: '2rem' }}>
+      <main style={{ padding: '2rem', textAlign: 'center' }}>
         <h1>Добро пожаловать на платформу знакомств и поиска тиммейтов!</h1>
         <p>Найдите друзей, отношения или команду — всё в одном месте.</p>
+
+        <Link to="/explore">
+          <button style={{ marginTop: '2rem', padding: '1rem 2rem', fontSize: '1.2rem' }}>
+            🔍 Найти людей
+          </button>
+        </Link>
       </main>
+
     </div>
   )
 }

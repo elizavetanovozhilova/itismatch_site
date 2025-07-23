@@ -1,9 +1,40 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import defaultAvatar from '../assets/itismatch.png'
+import { useRef } from 'react'
+
+
+
 
 function Profile() {
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
+  const fileInputRef = useRef()
+
+  const handleAvatarClick = () => {
+    fileInputRef.current.click()
+  }
+
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const form = new FormData()
+    form.append('user_id', localStorage.getItem('user_id'))
+    form.append('photo', file)
+
+    const res = await fetch('https://lzznm.app.n8n.cloud/webhook-test/e05eceaf-6c6b-426d-b897-047f03bfae77', {
+      method: 'POST',
+      body: form
+    })
+
+    if (res.ok) {
+  
+      window.location.reload()
+    } else {
+      alert('Ошибка при загрузке фотографии')
+    }
+  }
 
   useEffect(() => {
     const name = localStorage.getItem('username')
@@ -13,11 +44,9 @@ function Profile() {
     }
 
     const fetchUser = async () => {
-      const res = await fetch('https://lzznm.app.n8n.cloud/webhook-test/b47bad99-e009-462e-a7ee-ee69fadbc72a', {
+      const res = await fetch('https://lzznm.app.n8n.cloud/webhook/b47bad99-e009-462e-a7ee-ee69fadbc72a', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name })
       })
 
@@ -31,7 +60,8 @@ function Profile() {
           specialty: data.specialty,
           group_name: data.group_name,
           description: data.description,
-          photo: data.photo
+          photo: data.photo,
+          social_link: data.social_link || ''
         })
       } else {
         alert('Пользователь не найден')
@@ -54,14 +84,35 @@ function Profile() {
       <p><strong>Цель:</strong> {user.goal}</p>
       <p><strong>Пол:</strong> {user.gender === 'M' ? 'Мужской' : 'Женский'}</p>
       <p><strong>Специальность:</strong> {user.specialty}</p>
+      <p><strong>Соцсеть:</strong>{' '}
+        {user.social_link
+          ? <a href={`https://t.me/${user.social_link.replace('@', '')}`} target="_blank" rel="noopener noreferrer">
+              {user.social_link}
+            </a>
+          : '—'}
+      </p>
 
-      {user.photo && typeof user.photo === 'string' && (
+
+      <div className="avatar-container" onClick={handleAvatarClick}>
         <img
-          src={user.photo.startsWith('data:') ? user.photo : `https://твоя_ссылка_к_хранению/${user.photo}`}
-          alt="Фото профиля"
-          style={{ maxWidth: '200px', marginTop: '1rem' }}
+          src={
+            user.photo
+              ? (user.photo.startsWith('data:') ? user.photo : `https://твоя_ссылка_к_хранению/${user.photo}`)
+              : defaultAvatar
+          }
+          alt="Аватар"
+          className="avatar-image"
         />
-      )}
+        <div className="avatar-overlay">📷</div>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handlePhotoChange}
+        />
+      </div>
+
 
       <button onClick={() => navigate('/')} style={{ marginTop: '2rem' }}>
         ← Назад

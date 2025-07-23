@@ -13,6 +13,7 @@ function Register() {
     goal: '',
     gender: '',
     specialty: '',
+    social_link: '',
     password: ''
   })
 
@@ -34,7 +35,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // Хэшируем пароль
     const hashedPassword = SHA256(formData.password).toString()
 
     const form = new FormData()
@@ -46,13 +46,14 @@ function Register() {
     form.append('gender', formData.gender)
     form.append('specialty', formData.specialty)
     form.append('password', hashedPassword)
+    form.append('social_link', formData.social_link)
 
     if (formData.photo) {
       form.append('photo', formData.photo)
     }
 
     try {
-      const res = await fetch('https://lzznm.app.n8n.cloud/webhook-test/967df31d-459f-462b-b5a4-ed39bc6eabe6', {
+      const res = await fetch('https://lzznm.app.n8n.cloud/webhook/967df31d-459f-462b-b5a4-ed39bc6eabe6', {
         method: 'POST',
         body: form,
       })
@@ -66,7 +67,6 @@ function Register() {
       console.error('Ошибка отправки формы:', error)
       alert('Ошибка при отправке данных')
     }
-
   }
 
   return (
@@ -76,6 +76,8 @@ function Register() {
       <input name="group" placeholder="Группа" onChange={handleChange} />
       <input name="age" type="number" placeholder="Возраст" onChange={handleChange} />
       <textarea name="description" placeholder="Описание" onChange={handleChange} />
+      <input name="social_link" placeholder="tg (например, @yourtg)" onChange={handleChange} />
+
       <div>
         <p>Цель:</p>
         <button
@@ -100,11 +102,13 @@ function Register() {
           Тиммейт
         </button>
       </div>
+
       <select name="gender" onChange={handleChange} required>
         <option value="">Пол</option>
         <option value="M">Мужской</option>
         <option value="F">Женский</option>
       </select>
+
       <input name="specialty" placeholder="Специальность" onChange={handleChange} />
       <input name="password" type="password" placeholder="Пароль" onChange={handleChange} required />
       <button type="submit">Зарегистрироваться</button>

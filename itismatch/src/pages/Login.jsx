@@ -23,7 +23,7 @@ function Login() {
       password: hashedPassword
     }
   
-    const res = await fetch('https://lzznm.app.n8n.cloud/webhook-test/0a78e9fd-7880-4a66-859b-0700529534bd', {
+    const res = await fetch('https://lzznm.app.n8n.cloud/webhook/0a78e9fd-7880-4a66-859b-0700529534bd', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,9 @@ function Login() {
   
     if (data.success) {
       localStorage.setItem('username', data.name)
+      localStorage.setItem('user_id', data.user_id) 
       navigate('/')
+  
     } else {
       alert('Неверные данные')
     }
