@@ -1,12 +1,52 @@
-# React + Vite
+# ItIs Match
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Платформа для поиска друзей, партнёров по интересам, отношений или тиммейтов.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Frontend**: React + Vite
+* **Backend / API**: [n8n](https://n8n.io/) (Webhook + Supabase actions)
+* **База данных**: Supabase (PostgreSQL)
+* **Хранилище фото**: Supabase Storage
+* **Хэширование пароля**: `crypto-js` (SHA256)
+
+## Установка
+
+1. Клонируй проект:
+
+```bash
+git clone https://github.com/elizavetanovozhilova/itismatch_site.git
+cd itismatch
+```
+
+2. Установи зависимости:
+
+```bash
+npm install
+```
+
+3. Запусти фронтенд:
+
+```bash
+npm run dev
+```
+
+4. Перейди в браузере на адрес:
+
+```
+http://localhost:5173/
+```
+
+> Убедись, что Webhook-и в n8n и Supabase настроены и запущены.
+
+##  Страницы
+
+| URL         | Описание                       |
+| ----------- | ------------------------------ |
+| `/`         | Главная страница               |
+| `/register` | Регистрация                    |
+| `/login`    | Вход                           |
+| `/profile`  | Личный кабинет                 |
+| `/explore`  | Поиск подходящих пользователей |
