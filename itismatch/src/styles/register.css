@@ -76,15 +76,24 @@ button.selected {
   color: var(--white);
 }
 
-form .goal-selection {
+.goal-selection {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   margin-top: 1rem;
 }
 
-form .goal-selection button {
+.goal-selection .goal-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.goal-selection button {
+  min-width: 130px;
   background-color: var(--gray);
   color: var(--black);
   font-weight: 500;
@@ -92,6 +101,8 @@ form .goal-selection button {
   padding: 0.7rem 1.2rem;
   border: 1px solid #cbd5e1;
   transition: background-color 0.3s;
+  font-size: 1.05rem;
+  white-space: nowrap;
 }
 
 form .goal-selection button:hover {

@@ -105,10 +105,13 @@ function Register() {
         <textarea name="description" placeholder="Описание" onChange={handleChange} />
         <input name="social_link" placeholder="tg (например, @yourtg)" onChange={handleChange} />
         <div className="goal-selection">
-          <p>Цель:</p>
-          <button type="button" onClick={() => handleGoalClick('friendship')} className={formData.goal === 'friendship' ? 'selected' : ''}>Дружба</button>
-          <button type="button" onClick={() => handleGoalClick('relationship')} className={formData.goal === 'relationship' ? 'selected' : ''}>Отношения</button>
-          <button type="button" onClick={() => handleGoalClick('teammate')} className={formData.goal === 'teammate' ? 'selected' : ''}>Тиммейт</button>
+          <p style={{width: '100%', textAlign: 'center', marginBottom: '0.5em'}}>Цель:</p>
+          <div style={{color: 'gray', fontSize: '0.9em', marginBottom: '0.5em', width: '100%', textAlign: 'center'}}>Текущее значение: {formData.goal}</div>
+          <div className="goal-buttons-row">
+            <button type="button" onClick={() => handleGoalClick('Дружба')} className={formData.goal === 'Дружба' ? 'selected' : ''}>Дружба</button>
+            <button type="button" onClick={() => handleGoalClick('Отношения')} className={formData.goal === 'Отношения' ? 'selected' : ''}>Отношения</button>
+            <button type="button" onClick={() => handleGoalClick('Команда')} className={formData.goal === 'Команда' ? 'selected' : ''}>Команда</button>
+          </div>
         </div>
         <select name="gender" onChange={handleChange} required>
           <option value="">Пол</option>
