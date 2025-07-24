@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import defaultAvatar from '../assets/itismatch.png'
 import { useRef } from 'react'
-
-
+import '../styles/profile.css'
 
 
 function Profile() {
@@ -75,7 +74,7 @@ function Profile() {
   if (!user) return <p>Загрузка...</p>
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="profile-container">
       <h2>Личный кабинет</h2>
       <p><strong>Имя:</strong> {user.name}</p>
       <p><strong>Группа:</strong> {user.group_name}</p>
@@ -114,9 +113,8 @@ function Profile() {
       </div>
 
 
-      <button onClick={() => navigate('/')} style={{ marginTop: '2rem' }}>
-        ← Назад
-      </button>
+      <button onClick={() => navigate('/')}>← Назад</button>
+      <button onClick={() => navigate('/edit-profile')} style={{marginTop: '1rem'}}>Редактировать профиль</button>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import '../styles/auth.css'
+import '../styles/home-layout.css'
+import Illustration from '../assets/Illustration.svg'
 
 function Home() {
   const [username, setUsername] = useState(null)
@@ -13,53 +14,45 @@ function Home() {
   }, [])
 
   return (
-    <div>
-      <header style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
-        <div>It Is Match</div>
-        <div>
-          {username ? (
-            <>
-            <span>👤 {username}</span>
-            <Link to="/profile">
-              <button style={{ marginLeft: '1rem' }}>Личный кабинет</button>
-            </Link>
-            <Link to="/matches">
-              <button>❤️ Мои мэтчи</button>
-            </Link>
-
-            <button style={{ marginLeft: '1rem' }} onClick={() => {
+    <div className="home-container">
+      <a href="/" className="main-logo-link" style={{ position: 'absolute', top: '2rem', left: '2rem', zIndex: 10 }}>
+        <img src="/logo.svg" alt="ItIsMatch Logo" style={{ height: '48px', width: 'auto' }} />
+      </a>
+      <div className="header-buttons">
+        {username ? (
+          <>
+            <span className="username">👤 {username}</span>
+            <Link to="/profile"><button>Личный кабинет</button></Link>
+            <Link to="/matches"><button>❤️ Мои мэтчи</button></Link>
+            <button onClick={() => {
               localStorage.removeItem('username')
               setUsername(null)
-            }}>
-              Выйти
-            </button>
+            }}>Выйти</button>
           </>
-          
-            
-          ) : (
-            <>
-              <Link to="/login">
-                <button>Войти</button>
-              </Link>
-              <Link to="/register" style={{ marginLeft: '1rem' }}>
-                <button>Регистрация</button>
-              </Link>
-            </>
-          )}
+        ) : (
+          <>
+            <Link to="/login"><button>Войти</button></Link>
+            <Link to="/register"><button>Регистрация</button></Link>
+          </>
+        )}
+      </div>
+
+      <div className="main-layout">
+        <div className="left-text">
+          <h1>Добро пожаловать!</h1>
+          <p>Найдите друзей, отношения или команду — всё в одном месте.</p>
+          <Link to="/explore">
+            <button className="explore-button">🔍 Найти людей</button>
+          </Link>
         </div>
-      </header>
 
-      <main style={{ padding: '2rem', textAlign: 'center' }}>
-        <h1>Добро пожаловать на платформу знакомств и поиска тиммейтов!</h1>
-        <p>Найдите друзей, отношения или команду — всё в одном месте.</p>
+        <div className="right-image">
+          <img src={Illustration} alt="Иллюстрация" style={{ width: '420px', height: '420px', objectFit: 'contain', marginLeft: '220px' }} />
+        </div>
+      </div>
 
-        <Link to="/explore">
-          <button style={{ marginTop: '2rem', padding: '1rem 2rem', fontSize: '1.2rem' }}>
-            🔍 Найти людей
-          </button>
-        </Link>
-      </main>
-
+      <div className="divider-vertical" />
+      <div className="divider-horizontal" />
     </div>
   )
 }
