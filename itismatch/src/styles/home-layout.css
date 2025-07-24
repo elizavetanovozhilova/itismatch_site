@@ -1,0 +1,144 @@
+.home-container {
+    position: relative;
+    padding: 2rem;
+    color: var(--black);
+    background: var(--white);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.header-buttons {
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    display: flex;
+    gap: 1.2rem;
+    z-index: 2;
+    background: transparent;
+}
+
+.username {
+    font-weight: bold;
+    color: var(--primary);
+    margin-right: 1rem;
+    align-self: center;
+}
+
+.main-layout {
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 2rem;
+    margin-top: 4rem;
+    position: relative;
+    min-height: 500px;
+}
+
+.left-text {
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 350px;
+    z-index: 1;
+}
+
+.left-text h1 {
+    font-size: 2.8rem;
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+}
+
+.left-text p {
+    font-size: 1.2rem;
+    color: var(--black);
+    margin: 1rem 0 2rem 0;
+    font-weight: 400;
+}
+
+.explore-button {
+    margin-top: 1.5rem;
+    padding: 1rem 2.2rem;
+    font-size: 1.1rem;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 10px;
+    border: none;
+    box-shadow: none;
+    font-weight: 600;
+}
+
+.right-image {
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
+    z-index: 1;
+}
+
+.image-placeholder {
+    width: 320px;
+    height: 320px;
+    background: var(--gray);
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+    border: 2px dashed var(--primary);
+    font-weight: 500;
+}
+
+.divider-vertical {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary) 60%, var(--black) 100%);
+    opacity: 0.15;
+    z-index: 0;
+    border-radius: 2px;
+}
+
+.divider-horizontal {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 120px;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary) 60%, var(--black) 100%);
+    opacity: 0.12;
+    z-index: 0;
+    border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 1rem;
+    }
+    .left-text, .right-image {
+        max-width: 100%;
+        min-height: 200px;
+    }
+    .divider-vertical, .divider-horizontal {
+        display: none;
+    }
+    .header-buttons {
+        right: 1rem;
+        top: 1rem;
+    }
+}
+  

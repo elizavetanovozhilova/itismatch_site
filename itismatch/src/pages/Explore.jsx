@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../styles/explore.css'
 
 function Explore() {
   const [users, setUsers] = useState([])
@@ -45,7 +46,7 @@ function Explore() {
   const currentUser = users[currentIndex]
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="explore-container">
       <h2>Поиск пользователей</h2>
 
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
@@ -66,7 +67,7 @@ function Explore() {
       </div>
 
       {users.length > 0 && currentIndex < users.length ? (
-        <div style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
+        <div className="card">
           <h3>{currentUser.name}</h3>
           <p><strong>Группа:</strong> {currentUser.group_name}</p>
           <p><strong>Возраст:</strong> {currentUser.age}</p>

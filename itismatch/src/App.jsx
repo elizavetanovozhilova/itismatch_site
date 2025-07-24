@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Profile from './pages/Profile'
 import Explore from './pages/Explore'
 import Matches from './pages/Matches'
+import EditProfile from './pages/EditProfile'
 import Layout from './components/Layout'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Route>
       </Routes>
     </Router>

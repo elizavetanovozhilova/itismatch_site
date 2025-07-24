@@ -1,10 +1,23 @@
-/* styles/auth.css */
+.login-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  background: transparent;
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 form {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  max-width: 400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -30,12 +43,12 @@ button {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #646cff;
+  border-color: #42A4FF;
   outline: none;
 }
 
 button {
-  background-color: #646cff;
+  background-color: #42A4FF;
   color: white;
   border: none;
   cursor: pointer;
@@ -43,7 +56,7 @@ button {
 }
 
 button:hover {
-  background-color: #535bf2;
+  background-color: #1e90e0;
 }
 
 button:disabled {
@@ -63,7 +76,7 @@ form div button:hover {
 }
 
 button.selected {
-  background-color: #646cff;
+  background-color: #42A4FF;
   color: white;
 }
 

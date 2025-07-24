@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../styles/matches.css'
 
 function Matches() {
   const [matches, setMatches] = useState([])
@@ -44,10 +45,10 @@ function Matches() {
   
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="matches-container">
       <h2>Мои мэтчи</h2>
       {matches.length > 0 ? matches.map(user => (
-        <div key={user.user_id} style={{ border: '1px solid #ccc', padding: '1rem', marginBottom: '1rem' }}>
+        <div key={user.user_id} className="card">
             <h3>{user.name}</h3>
             <p>{user.description}</p>
             {user.mutual ? (
@@ -61,9 +62,7 @@ function Matches() {
         </div>
 
       )) : <p>Пока нет мэтчей</p>}
-      <button onClick={() => navigate('/')} style={{ marginTop: '2rem' }}>
-        ← Назад
-      </button>
+      <button onClick={() => navigate('/')}>← Назад</button>
       
     </div>
   )
