@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import defaultAvatar from '../assets/itismatch.png'
+import defaultAvatar from '../assets/Itismatch.png'
 import { useRef } from 'react'
 import '../styles/profile.css'
 
