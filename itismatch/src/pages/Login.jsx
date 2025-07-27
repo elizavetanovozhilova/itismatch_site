@@ -41,15 +41,20 @@ function Login() {
       body: JSON.stringify(body)
     })
   
-    const data = await res.json()
-  
-    if (data.success) {
+    let data
+    try {
+      data = await res.json()
+    } catch (e) {
+      setError('Данные некорректны, попробуйте ещё раз')
+      return
+    }
+
+    if (data && data.success) {
       localStorage.setItem('username', data.name)
       localStorage.setItem('user_id', data.user_id) 
       navigate('/')
-  
     } else {
-      alert('Неверные данные')
+      setError('Данные некорректны, попробуйте ещё раз')
     }
     
   }

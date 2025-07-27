@@ -11,6 +11,7 @@ function Matches() {
   const navigate = useNavigate()
   const userId = localStorage.getItem('user_id')
 
+  // --- уведомление о новом мэтче ---
   useEffect(() => {
     if (!userId) return
 
@@ -20,7 +21,19 @@ function Matches() {
       body: JSON.stringify({ user_id: userId })
     })
     .then(res => res.json())
-    .then(setMatches)
+    .then(newMatches => {
+      // Получаем id мэтчей из localStorage
+      const prevIds = JSON.parse(localStorage.getItem('matchIds') || '[]')
+      const newIds = newMatches.map(u => u.user_id)
+      // Ищем новые мэтчи
+      const newOnes = newIds.filter(id => !prevIds.includes(id))
+      if (prevIds.length && newOnes.length > 0) {
+        alert('У вас новый мэтч!')
+      }
+      // Обновляем сохранённые id мэтчей
+      localStorage.setItem('matchIds', JSON.stringify(newIds))
+      setMatches(newMatches)
+    })
   }, [userId])
 
   const handleLike = async (toUserId, liked) => {
@@ -57,65 +70,70 @@ function Matches() {
   }
 
   return (
-    <div className="matches-container">
-      <h2>Мои мэтчи</h2>
-      {matches.length > 0 ? matches.map(user => (
-        <div key={user.user_id} className="card" onClick={() => openUserPopup(user)}>
-            <h3>{user.name}</h3>
-            <p>{user.description}</p>
-            {user.mutual ? (
-            <p><strong>Соцсети:</strong> <a className="link" href={user.social_link} target="_blank" rel="noopener noreferrer">{user.social_link}</a></p>
-            ) : (
-            <div style={{ display: 'flex', gap: '1rem' }}>
-                <button onClick={(e) => {
-                  e.stopPropagation() // Предотвращаем всплытие события
-                  handleLike(user.user_id, true)
-                }}>👍</button>
-                <button onClick={(e) => {
-                  e.stopPropagation() // Предотвращаем всплытие события
-                  handleLike(user.user_id, false)
-                }}>👎</button>
+    <>
+      <div className="matches-outer">
+        <h2>Мои мэтчи</h2>
+        <div className="matches-container">
+          {matches.length > 0 ? matches.map(user => (
+            <div key={user.user_id} className="card" onClick={() => openUserPopup(user)}>
+                <h3>{user.name}</h3>
+                <p>{user.description}</p>
+                {user.mutual ? (
+                <p><strong>Соцсети:</strong> <a className="link" href={user.social_link} target="_blank" rel="noopener noreferrer">{user.social_link}</a></p>
+                ) : (
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    <button onClick={(e) => {
+                      e.stopPropagation() // Предотвращаем всплытие события
+                      handleLike(user.user_id, true)
+                    }}>👍</button>
+                    <button onClick={(e) => {
+                      e.stopPropagation() // Предотвращаем всплытие события
+                      handleLike(user.user_id, false)
+                    }}>👎</button>
+                </div>
+                )}
             </div>
-            )}
+          )) : <p>Пока нет мэтчей</p>}
         </div>
-      )) : <p>Пока нет мэтчей</p>}
 
-      {/* Попап с информацией о пользователе */}
-      {showPopup && selectedUser && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <button className="close-popup" onClick={closePopup}>×</button>
-            <h3>{selectedUser.name}</h3>
-            <div className="avatar-container">
-              <img
-                src={
-                  selectedUser.photo
-                    ? (selectedUser.photo.startsWith('data:') ? selectedUser.photo : `https://твоя_ссылка_к_хранению/${selectedUser.photo}`)
-                    : defaultAvatar
-                }
-                alt="Аватар"
-                className="avatar-image"
-              />
+        {/* Попап с информацией о пользователе */}
+        {showPopup && selectedUser && (
+          <div className="popup-overlay" onClick={closePopup}>
+            <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+              <button className="close-popup" onClick={closePopup}>×</button>
+              <h3>{selectedUser.name}</h3>
+              <div className="avatar-container">
+                <img
+                  src={
+                    selectedUser.photo
+                      ? (selectedUser.photo.startsWith('data:') ? selectedUser.photo : `https://твоя_ссылка_к_хранению/${selectedUser.photo}`)
+                      : defaultAvatar
+                  }
+                  alt="Аватар"
+                  className="avatar-image"
+                />
+              </div>
+              <p><strong>Группа:</strong> {selectedUser.group_name || '—'}</p>
+              <p><strong>Возраст:</strong> {selectedUser.age || '—'}</p>
+              <p><strong>Описание:</strong> {selectedUser.description || '—'}</p>
+              <p><strong>Цель:</strong> {selectedUser.goal || '—'}</p>
+              <p><strong>Пол:</strong> {selectedUser.gender === 'M' ? 'Мужской' : selectedUser.gender === 'F' ? 'Женский' : '—'}</p>
+              <p><strong>Специальность:</strong> {selectedUser.specialty || '—'}</p>
+              <p><strong>Соцсеть:</strong>{' '}
+                {selectedUser.social_link
+                  ? <a href={`https://t.me/${selectedUser.social_link.replace('@', '')}`} className="link" target="_blank" rel="noopener noreferrer">
+                      {selectedUser.social_link}
+                    </a>
+                  : '—'}
+              </p>
             </div>
-            <p><strong>Группа:</strong> {selectedUser.group_name || '—'}</p>
-            <p><strong>Возраст:</strong> {selectedUser.age || '—'}</p>
-            <p><strong>Описание:</strong> {selectedUser.description || '—'}</p>
-            <p><strong>Цель:</strong> {selectedUser.goal || '—'}</p>
-            <p><strong>Пол:</strong> {selectedUser.gender === 'M' ? 'Мужской' : selectedUser.gender === 'F' ? 'Женский' : '—'}</p>
-            <p><strong>Специальность:</strong> {selectedUser.specialty || '—'}</p>
-            <p><strong>Соцсеть:</strong>{' '}
-              {selectedUser.social_link
-                ? <a href={`https://t.me/${selectedUser.social_link.replace('@', '')}`} className="link" target="_blank" rel="noopener noreferrer">
-                    {selectedUser.social_link}
-                  </a>
-                : '—'}
-            </p>
           </div>
-        </div>
-      )}
-
-      <button onClick={() => navigate('/')}>← Назад</button>
-    </div>
+        )}
+      </div>
+      <div className="back-btn-center">
+        <button onClick={() => navigate('/')}>← Назад</button>
+      </div>
+    </>
   )
 }
 

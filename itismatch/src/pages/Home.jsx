@@ -15,24 +15,28 @@ function Home() {
 
   return (
     <div className="home-container">
-      <img src="/logo.svg" alt="ItIsMatch Logo" style={{ height: '48px', width: 'auto' }} />
-      <div className="header-buttons">
-        {username ? (
-          <>
-            <span className="username">👤 {username}</span>
-            <Link to="/profile"><button>Личный кабинет</button></Link>
-            <Link to="/matches"><button>❤️ Мои мэтчи</button></Link>
-            <button onClick={() => {
-              localStorage.removeItem('username')
-              setUsername(null)
-            }}>Выйти</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login"><button>Войти</button></Link>
-            <Link to="/register"><button>Регистрация</button></Link>
-          </>
-        )}
+      <div className="main-header">
+        <a href="/" className="main-logo-link">
+          <img src="/logo.svg" alt="ItIsMatch Logo" />
+        </a>
+        <div className="header-buttons">
+          {username ? (
+            <>
+              <span className="username">👤 {username}</span>
+              <Link to="/profile"><button>Личный кабинет</button></Link>
+              <Link to="/matches"><button>❤️ Мои мэтчи</button></Link>
+              <button onClick={() => {
+                localStorage.removeItem('username')
+                setUsername(null)
+              }}>Выйти</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login"><button>Войти</button></Link>
+              <Link to="/register"><button>Регистрация</button></Link>
+            </>
+          )}
+        </div>
       </div>
 
       <div className="main-layout">

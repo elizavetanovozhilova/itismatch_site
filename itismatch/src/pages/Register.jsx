@@ -65,7 +65,7 @@ function Register() {
   // Валидация номера группы
   const validateGroup = (group) => {
     if (!group) return true // Разрешаем пустое значение
-    const regex = /^11-[1-4]11$/
+    const regex = /^11-[1-4]...$/
     return regex.test(group)
   }
 
@@ -104,7 +104,7 @@ function Register() {
 
     // Валидация группы
     if (formData.group && !validateGroup(formData.group)) {
-      setError('Номер группы должен быть в формате 11-X11, где X - цифра от 1 до 4')
+      setError('Номер группы должен быть в формате 11-XYY, где X - цифра от 1 до 4')
       return
     }
 
@@ -182,7 +182,7 @@ function Register() {
         
         <input 
           name="group" 
-          placeholder="Группа (формат: 11-X11, где X от 1 до 4)" 
+          placeholder="Группа (формат: 11-XYY, где X от 1 до 4)" 
           onChange={handleChange} 
         />
         

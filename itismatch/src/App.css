@@ -111,3 +111,59 @@ button:active {
     animation: logo-spin infinite 20s linear;
   }
 }
+
+/* Custom Toast Notification */
+.toast-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: linear-gradient(90deg, #42A4FF 60%, #1e90e0 100%);
+  color: #fff;
+  padding: 2rem 2.5rem 2rem 2rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(66, 164, 255, 0.25), 0 2px 8px rgba(0,0,0,0.12);
+  font-size: 1.35rem;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  min-width: 320px;
+  max-width: 98vw;
+  text-align: center;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.toast-notification.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.toast-notification .toast-close-btn {
+  position: absolute;
+  top: 0.7rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.7rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+.toast-notification .toast-close-btn:hover {
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .toast-notification {
+    padding: 1.2rem 1.2rem 1.2rem 1rem;
+    font-size: 1.05rem;
+    min-width: 0;
+    max-width: 99vw;
+  }
+  .toast-notification .toast-close-btn {
+    top: 0.3rem;
+    right: 0.7rem;
+    font-size: 1.3rem;
+  }
+}
