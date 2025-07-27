@@ -76,22 +76,6 @@ function Profile() {
   return (
     <div className="profile-container">
       <h2>Личный кабинет</h2>
-      <p><strong>Имя:</strong> {user.name}</p>
-      <p><strong>Группа:</strong> {user.group_name}</p>
-      <p><strong>Возраст:</strong> {user.age}</p>
-      <p><strong>Описание:</strong> {user.description}</p>
-      <p><strong>Цель:</strong> {user.goal}</p>
-      <p><strong>Пол:</strong> {user.gender === 'M' ? 'Мужской' : 'Женский'}</p>
-      <p><strong>Специальность:</strong> {user.specialty}</p>
-      <p><strong>Соцсеть:</strong>{' '}
-        {user.social_link
-          ? <a href={`https://t.me/${user.social_link.replace('@', '')}`} target="_blank" rel="noopener noreferrer">
-              {user.social_link}
-            </a>
-          : '—'}
-      </p>
-
-
       <div className="avatar-container" onClick={handleAvatarClick}>
         <img
           src={
@@ -111,6 +95,22 @@ function Profile() {
           onChange={handlePhotoChange}
         />
       </div>
+      <p><strong>Имя:</strong> {user.name}</p>
+      <p><strong>Группа:</strong> {user.group_name}</p>
+      <p><strong>Возраст:</strong> {user.age}</p>
+      <p><strong>Описание:</strong> {user.description}</p>
+      <p><strong>Цель:</strong> {user.goal}</p>
+      <p><strong>Пол:</strong> {user.gender === 'M' ? 'Мужской' : 'Женский'}</p>
+      <p><strong>Специальность:</strong> {user.specialty}</p>
+      <p><strong>Соцсеть:</strong>{' '}
+        {user.social_link
+          ? <a href={`https://t.me/${user.social_link.replace('@', '')}`} className="link" target="_blank" rel="noopener noreferrer">
+              {user.social_link}
+            </a>
+          : '—'}
+      </p>
+
+
 
 
       <button onClick={() => navigate('/')}>← Назад</button>

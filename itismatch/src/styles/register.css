@@ -109,3 +109,8 @@ form .goal-selection button:hover {
   background-color: var(--primary-light);
   color: var(--white);
 }
+
+.goal-selection button.selected {
+  background-color: var(--primary);
+  color: var(--white);
+}

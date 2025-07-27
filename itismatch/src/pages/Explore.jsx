@@ -8,12 +8,13 @@ function Explore() {
   const [gender, setGender] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const navigate = useNavigate()
+  const User = localStorage.getItem('user_id') 
 
   const handleSearch = async () => {
     const res = await fetch('https://lzznm.app.n8n.cloud/webhook/60051b67-108a-4d15-8623-8c0ffa9571ce', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ goal, gender })
+      body: JSON.stringify({ goal, gender, User })
     })
 
     const data = await res.json()

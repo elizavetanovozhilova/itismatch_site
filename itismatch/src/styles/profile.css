@@ -38,3 +38,11 @@ button:hover {
 .avatar-container {
   margin: 1rem auto;
 } 
+
+.link {
+  color:#42A4FF
+}
+
+.link:hover {
+  opacity: 50%;
+}

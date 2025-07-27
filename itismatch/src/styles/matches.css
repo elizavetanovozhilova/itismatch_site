@@ -39,3 +39,141 @@ button {
 button:hover {
   background: #42A4FF;
 } 
+
+.link {
+  color:#42A4FF
+}
+
+.link:hover {
+  opacity: 50%;
+}
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--gray);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.avatar-container {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-color: #4a90e2;
+  background-color: #f8faff;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(74, 144, 226, 0.1),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card button {
+  transition: all 0.2s ease;
+}
+
+.card button:hover {
+  transform: scale(1.1);
+  background-color: #e6f0fd;
+}
+
+/* Стили для попапа */
+.popup-overlay {
+  /* ... предыдущие стили ... */
+  backdrop-filter: blur(3px);
+}
+
+.popup-content {
+  /* ... предыдущие стили ... */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-popup:hover {
+  color: #4a90e2;
+}
+
+/* Стили для ссылок */
+.link {
+  color: #4a90e2;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #2a6ec7;
+  text-decoration: underline;
+}

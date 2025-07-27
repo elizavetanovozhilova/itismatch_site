@@ -1,6 +1,7 @@
 body {
   background: var(--white);
   color: var(--black);
+  height: 110vh;
 }
 
 .explore-container {
