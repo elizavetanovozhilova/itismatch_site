@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/matches.css'
-import defaultAvatar from '../assets/itismatch.png'
+import defaultAvatar from '../assets/Itismatch.png'
 
 function Matches() {
   const [matches, setMatches] = useState([])
