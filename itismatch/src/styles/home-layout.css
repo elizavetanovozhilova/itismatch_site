@@ -141,4 +141,66 @@
         top: 1rem;
     }
 }
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 0.5rem;
+    min-height: 100vh;
+    height: auto;
+  }
+  .main-layout {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    margin-top: 2rem;
+    min-height: unset;
+  }
+  .left-text, .right-image {
+    max-width: 100%;
+    min-height: 120px;
+    padding: 0;
+  }
+  .left-text h1 {
+    font-size: 1.5rem;
+  }
+  .left-text p {
+    font-size: 1rem;
+  }
+  .explore-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.7rem 0;
+  }
+  .right-image img {
+    width: 90vw !important;
+    height: auto !important;
+    margin-left: 0 !important;
+    max-width: 100%;
+  }
+  .header-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+  .divider-vertical, .divider-horizontal {
+    display: none;
+  }
+  .main-logo-link {
+    position: static !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 0.5rem 0;
+    width: 100%;
+    z-index: 10;
+  }
+  .main-logo-link img {
+    height: 40px !important;
+    width: auto !important;
+  }
+  .home-container {
+    padding-top: 0.5rem;
+  }
+}
   
