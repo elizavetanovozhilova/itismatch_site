@@ -15,9 +15,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      <a href="/" className="main-logo-link" style={{ position: 'absolute', top: '2rem', left: '2rem', zIndex: 10 }}>
-        <img src="/logo.svg" alt="ItIsMatch Logo" style={{ height: '48px', width: 'auto' }} />
-      </a>
+      <img src="/logo.svg" alt="ItIsMatch Logo" style={{ height: '48px', width: 'auto' }} />
       <div className="header-buttons">
         {username ? (
           <>
